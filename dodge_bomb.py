@@ -2,6 +2,7 @@ import random
 import sys
 import pygame as pg
 
+
 WIDTH, HEIGHT = 1600, 900
 
 
@@ -18,6 +19,7 @@ def main():
     y = random.randint(0,HEIGHT)
     bb_rct = bb.get_rect()
     bb_rct.center = x, y
+    vx, vy = +5, +5
 
     clock = pg.time.Clock()
     tmr = 0
@@ -28,10 +30,11 @@ def main():
 
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
+        bb_rct.move_ip(vx, vy)
         screen.blit(bb,bb_rct)
         pg.display.update()
         tmr += 1
-        clock.tick(10)
+        clock.tick(50)
 
 
 if __name__ == "__main__":
