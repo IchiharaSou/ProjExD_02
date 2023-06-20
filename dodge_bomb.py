@@ -11,6 +11,9 @@ delta = {
     pg.K_RIGHT: (+5,0),
 }
 
+
+accs = [a for a in range(1, 11)]
+
 def check_bound(rect: pg.rect) -> tuple[bool,bool]:
         """
     こうかとんRect，爆弾Rectが画面外 or 画面内かを判定する関数
@@ -18,9 +21,9 @@ def check_bound(rect: pg.rect) -> tuple[bool,bool]:
     戻り値：横方向，縦方向の判定結果タプル（True：画面内／False：画面外）
     """
         yoko, tate = True, True
-        if rect.left < 0 or WIDTH < rect.right:  # 横方向判定
+        if rect.left < 0 or WIDTH < rect.right:
             yoko = False
-        if rect.top < 0 or HEIGHT < rect.bottom:  # 縦方向判定
+        if rect.top < 0 or HEIGHT < rect.bottom: 
             tate = False
         return yoko, tate
 
@@ -31,6 +34,21 @@ def main():
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+    kk_gyaku = pg.transform.flip(kk_img, True, False)
+    muki = {
+    (0, 0): kk_img,
+    (-5, 0): kk_img,
+    (-5, -5): pg.transform.rotozoom(kk_img, -45, 1.0),
+    (0, -5): pg.transform.rotozoom(kk_gyaku, 90, 1.0),
+    (+5, -5): pg.transform.rotozoom(kk_gyaku, 45, 1.0),
+    (+5, 0): kk_gyaku,
+    (+5, +5): pg.transform.rotozoom(kk_gyaku, -45, 1.0),
+    (0, +5): pg.transform.rotozoom(kk_gyaku, -90, 1.0),
+    (-5, +5): pg.transform.rotozoom(kk_img, 45, 1.0), 
+    
+}
+    kk_imgs = muki
+    kk_img = kk_imgs[(0,0)]
     kk_rct = kk_img.get_rect()
     kk_rct.center = 900, 400
     bb = pg.Surface((20, 20))
@@ -63,6 +81,8 @@ def main():
         kk_rct.move_ip(sum_mv)
         if check_bound(kk_rct) != (True, True):
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
+        kk_img = kk_imgs[tuple(sum_mv)]
+        
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct)
         bb_rct.move_ip(vx, vy)
