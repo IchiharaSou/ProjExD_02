@@ -11,7 +11,6 @@ delta = {
     pg.K_RIGHT: (+5,0),
 }
 
-
 accs = [a for a in range(1, 11)]
 
 def check_bound(rect: pg.rect) -> tuple[bool,bool]:
@@ -45,8 +44,7 @@ def main():
     (+5, +5): pg.transform.rotozoom(kk_gyaku, -45, 1.0),
     (0, +5): pg.transform.rotozoom(kk_gyaku, -90, 1.0),
     (-5, +5): pg.transform.rotozoom(kk_img, 45, 1.0), 
-    
-}
+    }
     kk_imgs = muki
     kk_img = kk_imgs[(0,0)]
     kk_rct = kk_img.get_rect()
