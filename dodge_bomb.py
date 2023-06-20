@@ -45,6 +45,10 @@ def main():
     (0, +5): pg.transform.rotozoom(kk_gyaku, -90, 1.0),
     (-5, +5): pg.transform.rotozoom(kk_img, 45, 1.0), 
     }                                                     #演習１
+    '''
+    キーの値にこうかとんの画像を読み込んで角度を変更する。
+    右向きの画像は元画像を反転させたものを読み込んでいる。
+    '''
     kk_imgs = muki
     kk_img = kk_imgs[(0,0)]
     kk_rct = kk_img.get_rect() #練習３
